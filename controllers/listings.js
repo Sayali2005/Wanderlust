@@ -11,7 +11,6 @@ module.exports.index = async (req, res) => {
   } else if (search) {
     search = search.trim();
     console.log("Searching for:", search);
-    // Search in title, location, and country (case-insensitive)
     alllisting = await Listing.find({
       $or: [
         { title: { $regex: search, $options: 'i' } },
@@ -43,29 +42,8 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-
   try {
-    const { location } = req.body.listing;
-
-    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${req.body.listing.location}&format=json`);
-    if (!response.ok) {
-      req.flash("error", "Error fetching location data from OpenStreetMap!");
-      return res.redirect("/listings/new");
-    }
-    const data = await response.json();
-
-    if (!data.length) {
-      req.flash("error", "Location not found!");
-      return res.redirect("/listings/new");
-    }
-
-    const [lon, lat] = [parseFloat(data[0].lon), parseFloat(data[0].lat)];
-
-    console.log("Latitude:", lat);
-    console.log("Longitude:", lon);
-
     const newListing = new Listing(req.body.listing);
-    newListing.geometry = { type: "Point", coordinates: [lon, lat] };
 
     const url = req.file?.path || "";
     const filename = req.file?.filename || "";
