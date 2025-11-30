@@ -34,7 +34,6 @@ const listingSchema = new Schema({
     type : Schema.Types.ObjectId,
     ref : "User",
   },
-<<<<<<< HEAD
   geometry : {
     type: {
       type: String,
@@ -50,7 +49,6 @@ const listingSchema = new Schema({
     type: String,
     enum: ["Trending", "Rooms", "Iconic Cities", "Mountains", "Castles", "Amazing Pools", "Camping", "Farms", "Arctic", "Domes", "Boats"],
   }
-=======
   // geometry : {
   //   type: {
   //     type: String,
@@ -62,7 +60,6 @@ const listingSchema = new Schema({
   //     required: true
   // } 
   // }
->>>>>>> 0f2b5b00ecbd177999491adea016b1664fe00a9e
   
 });
 //when listing is deleted ,corresponding reviews are also deldeted!
