@@ -50,6 +50,13 @@ module.exports.createListing = async (req, res, next) => {
     newListing.image = { url, filename };
 
     newListing.owner = req.user._id;
+
+    // Always set geometry with default coordinates (New Delhi, India)
+    newListing.geometry = {
+      type: 'Point',
+      coordinates: [77.209, 28.6139]
+    };
+
     let savedListing = await newListing.save();
     console.log(savedListing);
     req.flash("success", "New Listing Created!");
